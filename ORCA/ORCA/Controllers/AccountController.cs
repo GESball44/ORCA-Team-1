@@ -17,6 +17,7 @@ namespace ORCA.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        //private DefaultConnection db = new DefaultConnection();
 
         public AccountController()
         {
@@ -147,12 +148,19 @@ namespace ORCA.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, User model2)
         {
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                //var user2 = new User { ID = model2.ID, Email = model2.Email, FirstName = model2.FirstName, LastName = model2.LastName};
+
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                //db.Users.Add(user2);
+                //db.SaveChanges();
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
