@@ -19,7 +19,7 @@ namespace ORCA.Controllers
         public ManageController()
         {
         }
-
+        //new
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
